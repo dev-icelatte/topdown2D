@@ -20,7 +20,9 @@ private:
     // animation variables
     float runningTime{};
     int frame{};
-    const int maxFrame{6};
-    const float updateTime{1.f / 12.f};
-    const float speed{4.f};
+    int maxFrame{6};
+    float updateTime{1.f / 12.f};
+    float speed{4.f};
+    float width{};
+    float height{};
 };

@@ -3,15 +3,15 @@
 
 Character::Character()
 {
-    float width = texture.width / maxFrame;
-    float height = texture.height / maxFrame;
+    width = texture.width / maxFrame;
+    height = texture.height;
 }
 
 void Character::setScreenPos(int winWidth, int winHeight)
 {
     screenPos = {
-        (float)winWidth / 2.0f - 4.0f * (0.5f * (float)texture.width / 6),
-        (float)winHeight / 2.0f - 4.0f * (0.5f * (float)texture.height)};
+        (float)winWidth / 2.0f - 4.0f * (0.5f * width),
+        (float)winHeight / 2.0f - 4.0f * (0.5f * height)};
 }
 
 void Character::tick(float deltaTime)
@@ -48,7 +48,7 @@ void Character::tick(float deltaTime)
     }
 
     // draw knight
-    Rectangle source{frame * (float)texture.width / 6.f, 0.f, rightLeft * (float)texture.width / 6.f, (float)texture.height};
-    Rectangle dest{screenPos.x, screenPos.y, 4.0f * (float)texture.width / 6.0f, 4.0f * (float)texture.height};
+    Rectangle source{frame * width, 0.f, rightLeft * width, height};
+    Rectangle dest{screenPos.x, screenPos.y, 4.0f * width, 4.0f * height};
     DrawTexturePro(texture, source, dest, Vector2{}, 0.f, WHITE);
 }
