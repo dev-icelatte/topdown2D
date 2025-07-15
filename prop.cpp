@@ -3,7 +3,7 @@
 
 Prop::Prop(Vector2 pos, Texture2D tex) : worldPos(pos), texture(tex)
 {
-
+    
 }
 
 void Prop::Render(Vector2 knightPos)
@@ -15,11 +15,9 @@ void Prop::Render(Vector2 knightPos)
 Rectangle Prop::GetCollisionRec(Vector2 knightPos)
 {
     Vector2 screenPos{Vector2Subtract(worldPos, knightPos)};
-    return Rectangle
-    {
+    return Rectangle{
         screenPos.x,
         screenPos.y,
         texture.width * scale,
-        texture.height * scale
-    };
+        texture.height * scale};
 }
