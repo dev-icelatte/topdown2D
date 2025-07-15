@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "raymath.h"
+#include "basecharacter.h"
 #include "character.h"
 #include "enemy.h"
 #include "prop.h"
@@ -24,6 +25,7 @@ int main()
         LoadTexture("characters/goblin_idle_spritesheet.png"),
         LoadTexture("characters/goblin_run_spritesheet.png"),
     };
+    goblin.setTarget(&knight);
 
     Prop props[2]
     {
@@ -60,7 +62,7 @@ int main()
         // check prop collisions
         for (auto prop : props)
         {
-            if (CheckCollisionRecs(prop.GetCollisionRec(knight.getWorldPos()), knight.GetCollisionRec()))
+            if (CheckCollisionRecs(prop.GetCollisionRec(knight.getWorldPos()), knight.getCollisionRec()))
             {
                 knight.undoMovement();
             }
