@@ -19,19 +19,16 @@ int main()
 
     Character knight{windowWidth, windowHeight};
 
-    Enemy goblin
-    {
+    Enemy goblin{
         Vector2{},
         LoadTexture("characters/goblin_idle_spritesheet.png"),
         LoadTexture("characters/goblin_run_spritesheet.png"),
     };
     goblin.setTarget(&knight);
 
-    Prop props[2]
-    {
+    Prop props[2]{
         Prop{Vector2{600.f, 300.f}, LoadTexture("nature_tileset/Rock.png")},
-        Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}
-    };
+        Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}};
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -48,9 +45,9 @@ int main()
         {
             prop.Render(knight.getWorldPos());
         }
-        
+
         knight.tick(GetFrameTime());
-        //check mapbounds
+        // check mapbounds
         if (knight.getWorldPos().x < 0.f ||
             knight.getWorldPos().y < 0.f ||
             knight.getWorldPos().x + windowWidth > map.width * mapScale ||
@@ -69,6 +66,14 @@ int main()
         }
 
         goblin.tick(GetFrameTime());
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            if (CheckCollisionRecs(goblin.getCollisionRec(), knight.getCollisionRec()))
+            {
+                goblin.setAlive(false);
+            }
+        }
 
         EndDrawing();
     }
